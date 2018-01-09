@@ -1,8 +1,10 @@
 package com.example.smack_jack.a108ambulance;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -29,7 +31,12 @@ import android.widget.ToggleButton;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.common.collect.Range;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
 
@@ -37,11 +44,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.util.Calendar;
 
-public class Signup extends AppCompatActivity implements View.OnClickListener {
-    Button b1,b2;
-    TextView t1;
+public class Signup extends AppCompatActivity{
+    Button signup,login;
+    TextView textview;
     EditText name,email,mob,age,pass;
     Spinner bloodgroup,sex,state,city;
     private Button btn;
@@ -53,7 +61,8 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
     protected void onStart() {
         super.onStart();
     }
-
+    private FirebaseAuth mAuth;
+    int value=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +72,13 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         mob=(EditText)findViewById(R.id.mobilenumsignup);
         age=(EditText)findViewById(R.id.agesignup);
         pass=(EditText)findViewById(R.id.passwordSignup);
+        mAuth = FirebaseAuth.getInstance();
 
         bloodgroup = (Spinner) findViewById(R.id.bloodgroupsignup);
         sex = (Spinner) findViewById(R.id.sexsignup);
         state = (Spinner) findViewById(R.id.stateSignup);
         city  = (Spinner) findViewById(R.id.citySignup);
-        t1=(TextView)findViewById(R.id.tv);
+        textview=(TextView)findViewById(R.id.tv);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.bloodgroups, android.R.layout.simple_spinner_dropdown_item);
@@ -92,10 +102,9 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         city.setAdapter(adapter4);
 
-        b1=(Button)findViewById(R.id.loginSignup);
-        b2=(Button)findViewById(R.id.signupSignup);
-        b1.setOnClickListener(this);
-        b2.setOnClickListener(this);
+        signup=(Button)findViewById(R.id.signupSignup);
+        login=(Button)findViewById(R.id.loginSignup);
+
 
         btn = (Button) findViewById(R.id.uploadimagesignup);
         imageview = (ImageView) findViewById(R.id.picviewsignup);
@@ -129,7 +138,50 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
                 showPictureDialog();
             }
         });
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitForm();
+                if (value == 1) {
+                    onRegister();
+                }
+            }
 
+        });
+    }
+    public void onRegister()
+    {
+        final ProgressDialog progressDialog = new ProgressDialog(Signup.this,
+            R.style.Widget_AppCompat_ButtonBar_AlertDialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
+        final String cemail = email.getText().toString();
+        final String password = pass.getText().toString();
+        mAuth.createUserWithEmailAndPassword(cemail, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.i("TAG", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            progressDialog.dismiss();
+                            Toast.makeText(Signup.this, "Registered Successfully.",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent i=new Intent(Signup.this,MainActivity.class);
+                            startActivity(i);
+
+                        } else {
+                            progressDialog.dismiss();
+                            // If sign in fails, display a message to the user.
+                            Log.i("TAG", "createUserWithEmail:failure");
+                            Toast.makeText(getApplicationContext(),"Registration Failed Please Check Internet Connection",Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                });
     }
     private void submitForm() {
       mAwesomeValidation.validate();
@@ -157,10 +209,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         //first validate the form then move ahead
         //if this becomes true that means validation is successfull
         else if (mAwesomeValidation.validate()) {
-           Toast.makeText(this, "Registration Successfull Login Now", Toast.LENGTH_LONG).show();
-
-            Intent i=new Intent(this,MainActivity.class);
-            startActivity(i);
+         value=1;
         }
     }
 
@@ -262,18 +311,4 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-
-    @Override
-    public void onClick(View view) {
-        if(view.getId()==R.id.signupSignup)
-        {
-         submitForm();
-        }
-        if(view.getId()==R.id.loginSignup)
-        {
-           Intent i=new Intent(this,MainActivity.class);
-            startActivity(i);
-        }
-
-    }
 }
