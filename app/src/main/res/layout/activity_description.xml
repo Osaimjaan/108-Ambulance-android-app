@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.smack_jack.a108ambulance.Emergencyfor"
-    android:background="@color/primaryTextColor"
+    android:background="@android:color/white"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/fortimecountdescription"
             style="@style/normalText"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
@@ -33,24 +32,24 @@
             android:shadowDx="5"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:background="@drawable/plain2"
+        android:background="@color/background2"
         android:orientation="vertical"
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:gravity="center"
             android:shadowColor="@android:color/white"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="3"
-            android:gravity="center"
             android:text="Please Provide the details so that we can serve you better and faster"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
@@ -61,35 +60,35 @@
             android:id="@+id/uploadimageindescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/buttonshape2"
             android:text="Upload Photo"
-            android:textStyle="bold"
-            android:textSize="21sp"
             android:textAllCaps="false"
-            android:layout_marginBottom="15dp"/>
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
         <Button
-            android:id="@+id/uploadvoicedescription"
             android:layout_width="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="21sp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/buttonshape2"
             android:text="Upload Description"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textSize="21sp"
+            android:textStyle="bold" />
 
 
         <Button
             android:id="@+id/proceeddescription"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="12dp"
             android:layout_marginTop="60dp"
             android:background="@drawable/buttonshape"
-            android:layout_gravity="center"
             android:shadowColor="@android:color/black"
             android:shadowDx="20"
             android:shadowDy="20"

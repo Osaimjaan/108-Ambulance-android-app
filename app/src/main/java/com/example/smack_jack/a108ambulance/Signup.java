@@ -78,7 +78,6 @@ public class Signup extends AppCompatActivity{
         sex = (Spinner) findViewById(R.id.sexsignup);
         state = (Spinner) findViewById(R.id.stateSignup);
         city  = (Spinner) findViewById(R.id.citySignup);
-        textview=(TextView)findViewById(R.id.tv);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.bloodgroups, android.R.layout.simple_spinner_dropdown_item);
@@ -152,7 +151,7 @@ public class Signup extends AppCompatActivity{
     public void onRegister()
     {
         final ProgressDialog progressDialog = new ProgressDialog(Signup.this,
-            R.style.Widget_AppCompat_ButtonBar_AlertDialog);
+            R.style.Theme_AppCompat_Light_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();

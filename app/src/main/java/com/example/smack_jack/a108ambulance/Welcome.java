@@ -5,6 +5,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -38,6 +41,11 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class Welcome extends AppCompatActivity
@@ -48,9 +56,11 @@ public class Welcome extends AppCompatActivity
     GoogleMap googleMap;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
+    Location mLastLocation;
     Marker marker;
     ImageView i1;
     MainActivity m1=new MainActivity();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +90,9 @@ public class Welcome extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
+
     boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
@@ -121,8 +134,17 @@ public class Welcome extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_LogOut) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(Welcome.this, MainActivity.class);
+            startActivity(intent);
+            finish();
             return true;
+        }
+        if (id == R.id.action_exit) {
+         System.exit(1);
+         finish();
+         return true;
         }
 
 

@@ -1,12 +1,13 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="primaryColor">#fa0f03</color>
-    <color name="primaryLightColor">#4821b6</color>
-    <color name="primaryDarkColor">#0039cb</color>
-    <color name="secondaryColor">#9925b7</color>
-    <color name="secondaryLightColor">#eade1be1</color>
-    <color name="secondaryDarkColor">#dada13</color>
+    <color name="primaryColor">#42a5f5</color>
+    <color name="secondaryLightColor">#9575cd</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#080808</color>
-    <color name="pink">#fd055c</color>
+    <color name="background">#d1c4e9</color>
+    <color name="buttoncolors">#AB47BC</color>
+    <color name="background2">#E8EAF6</color>
+    <color name="background3">#76FF03</color>
+
+
 </resources>

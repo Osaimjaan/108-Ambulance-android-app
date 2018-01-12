@@ -7,11 +7,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.smack_jack.a108ambulance.Welcome"
     tools:showIn="@layout/app_bar_welcome"
-    android:background="@drawable/plain"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/header"
         android:orientation="vertical"
         android:background="@android:color/transparent"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -28,7 +27,6 @@
             android:layout_height="150dp" android:contentDescription="TODO"/>
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
