@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity  {
         login=findViewById(R.id.login);
         signup=findViewById(R.id.signup);
         forgotpass=findViewById(R.id.forgotpassword);
-        email=findViewById(R.id.emailLOGIN);
-        password=findViewById(R.id.passwordLOGIN);
+        email=findViewById(R.id.userEmail);
+        password=findViewById(R.id.userPassword);
         mAuth = FirebaseAuth.getInstance();
         requestStoragePermission();
         login.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity  {
 
                 Intent intent = new Intent(MainActivity.this, Signup.class);
                 startActivity(intent);
-                finish();
+
             }
         });
         forgotpass.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity  {
 
                 Intent intent = new Intent(MainActivity.this, ForgetPassword.class);
                 startActivity(intent);
-                finish();
+               
             }
         });
 
